@@ -1,6 +1,5 @@
 import { View, Button, Alert } from "react-native";
-import React, {useState} from "react";
-import { router } from "expo-router";
+import React from "react";
 import { deleteDb, createTablesIfNotExists } from "../../database/management.js";
 import { addWallet } from "../../database/controllers/wallets.js";
 import { addExpense } from "../../database/controllers/expenses.js";

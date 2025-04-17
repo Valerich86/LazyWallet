@@ -28,14 +28,14 @@ const Expenses = () => {
   };
 
   const handleExportPress = async () => {
-    if (data.length > 0){
+    if (data.length > 0) {
       try {
         await exportFile(data, total);
       } catch (error) {
         console.log(error);
       }
     } else return;
-  }
+  };
 
   const ListItem = ({ item }) => {
     return (
@@ -59,7 +59,12 @@ const Expenses = () => {
             alignItems: "center",
           }}
         >
-          <Text style={{ fontStyle: "italic", overflow: 'hidden', width: '70%' }} numberOfLines={1}>{item.title}</Text>
+          <Text
+            style={{ fontStyle: "italic", overflow: "hidden", width: "70%" }}
+            numberOfLines={1}
+          >
+            {item.title}
+          </Text>
           <Text style={{ fontWeight: "500" }}>
             {item.sum}
             {item.sign}
@@ -72,17 +77,27 @@ const Expenses = () => {
   return (
     <SafeAreaView>
       <View style={styles.header}>
-                <Text style={{fontStyle: 'italic'}}>Всего за месяц:</Text>
-                <View style={{flexDirection: 'row'}}>
-                  {total.map((item) => <Text adjustsFontSizeToFit style={{fontSize: 17, fontWeight: '500'}} key={item.id}>   {item.total}{item.sign}</Text>)}
-                </View>
-              </View>
+        <Text style={{ fontStyle: "italic" }}>Всего за месяц:</Text>
+        <View style={{ flexDirection: "row" }}>
+          {total.map((item) => (
+            <Text
+              adjustsFontSizeToFit
+              style={{ fontSize: 17, fontWeight: "500" }}
+              key={item.id}
+            >
+              {" "}
+              {item.total}
+              {item.sign}
+            </Text>
+          ))}
+        </View>
+      </View>
       <View style={styles.content}>
         <FlatList
           data={data}
           keyExtractor={(item) => item.targetDate}
           renderItem={({ item }) => (
-            <View style={{marginBottom: 25, marginTop: 15}}>
+            <View style={{ marginBottom: 25, marginTop: 15 }}>
               <Text
                 style={{
                   textAlign: "center",
@@ -96,22 +111,40 @@ const Expenses = () => {
               {item.data.map((obj) => (
                 <ListItem item={obj} key={obj.id} />
               ))}
-              <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-              <Text style={{fontWeight: '500', fontStyle: 'italic', color: 'green'}}>ИТОГО:</Text>
-              <View style={{flexDirection: 'row'}}>
-              {item.totalByCurrency.map((obj) => (
-                <View key={obj.sign}>
-                  <Text
-                    style={{
-                      textAlign: "right",
-                      fontSize: 16,
-                      fontWeight: "500",
-                      color: "green",
-                    }}
-                  >    {obj.total}{obj.sign}</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    fontWeight: "500",
+                    fontStyle: "italic",
+                    color: "green",
+                  }}
+                >
+                  ИТОГО:
+                </Text>
+                <View style={{ flexDirection: "row" }}>
+                  {item.totalByCurrency.map((obj) => (
+                    <View key={obj.sign}>
+                      <Text
+                        style={{
+                          textAlign: "right",
+                          fontSize: 16,
+                          fontWeight: "500",
+                          color: "green",
+                        }}
+                      >
+                        {" "}
+                        {obj.total}
+                        {obj.sign}
+                      </Text>
+                    </View>
+                  ))}
                 </View>
-              ))}
-              </View>
               </View>
             </View>
           )}
@@ -142,27 +175,27 @@ const Expenses = () => {
 export default Expenses;
 
 const styles = StyleSheet.create({
-  header:{ 
-      height: '10%',
-      elevation: 3,
-      flexDirection: 'row', 
-      justifyContent: 'space-between', 
-      backgroundColor: Colors.header,
-      paddingLeft: 15,
-      paddingRight: 15,
-      alignItems: 'center'
-    },
-    content: {
-      height: '80%',
-      paddingLeft: 15,
-      paddingRight: 15,
-    },
-    footer: {
-      height: '10%',
-      paddingLeft: 15,
-      paddingRight: 15,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center'
-    },
+  header: {
+    height: "10%",
+    elevation: 3,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: Colors.header,
+    paddingLeft: 15,
+    paddingRight: 15,
+    alignItems: "center",
+  },
+  content: {
+    height: "80%",
+    paddingLeft: 15,
+    paddingRight: 15,
+  },
+  footer: {
+    height: "10%",
+    paddingLeft: 15,
+    paddingRight: 15,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 });

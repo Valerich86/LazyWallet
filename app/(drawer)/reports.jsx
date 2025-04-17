@@ -1,12 +1,8 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useState, useEffect } from "react";
-import { getAllExpenseCategories } from "../../database/controllers/expenseCategories";
-import { getAllIncomeCategories } from "../../database/controllers/incomeCategories";
-import { getAll } from "../../database/controllers/currencies"
-import { validate } from "../../services/validateValues";
+import { getAll } from "../../database/controllers/currencies";
 import CustomButton from "../../components/CustomButton";
-import CustomInput from "../../components/CustomInput";
 import CustomDropdown from "../../components/CustomDropdown";
 import DatePicker from "../../components/DatePicker";
 import WrongInputMessage from "../../components/WrongInputMessage";
@@ -22,18 +18,13 @@ const Reports = () => {
   ];
   const [data, setData] = useState([]);
   const [message, setMessage] = useState(null);
-  const [expenseCategories, setExpenseCategories] = useState([]);
-  const [incomeCategories, setIncomeCategories] = useState([]);
   const [currencies, setCurrencies] = useState([]);
-  // const [expenseCategoriesVisible, setexpenseCategoriesVisible] = useState(true);
-  // const [incomeCategoriesVisible, setincomeCategoriesVisible] = useState(false);
   const [reportVisible, setReportVisible] = useState(false);
   const [form, setForm] = useState({
     type: reportTypes[0],
     date_start: new Date().toISOString().split("T")[0],
     date_end: new Date().toISOString().split("T")[0],
-    // category: '',
-    currency_id: 1
+    currency_id: 1,
   });
 
   useEffect(() => {
@@ -42,10 +33,6 @@ const Reports = () => {
 
   const fetchData = async () => {
     try {
-      // let result1 = await getAllIncomeCategories();
-      // setIncomeCategories(result1);
-      // let result2 = await getAllExpenseCategories();
-      // setExpenseCategories(result2);
       let result = await getAll();
       setCurrencies(result);
     } catch (error) {
@@ -58,53 +45,27 @@ const Reports = () => {
       setMessage("Начальная дата не должна превышать конечную");
       return;
     }
-    // if (form.category == '' && form.type == 'expenses_by_category') setForm({...form, category: expenseCategories[0].title});
-    // if (form.category == '' && form.type == 'incomes_by_category') setForm({...form, category: incomeCategories[0].title});
-    
+
     try {
       const result = await requestReport(form);
       setData(result);
       setReportVisible(true);
     } catch (error) {
       console.log(error);
-    } 
+    }
   };
 
   return (
     <SafeAreaView>
-      <View style={{padding: 15}}>
+      <View style={{ padding: 15 }}>
         <CustomDropdown
           title={"Вид отчёта"}
           selectedValue={{}}
           onValueChange={(e) => {
-            // if (e.value === 'expenses_by_category'){
-            //   setincomeCategoriesVisible(false);
-            //   setexpenseCategoriesVisible(true);
-            // }
-            // else if (e.value === 'incomes_by_category'){
-            //   setexpenseCategoriesVisible(false);
-            //   setincomeCategoriesVisible(true);
-            // }
-            setForm({ ...form, type: e })
+            setForm({ ...form, type: e });
           }}
           values={reportTypes}
         />
-        {/* {expenseCategoriesVisible && (
-          <CustomDropdown
-            title={"Категория расходов"}
-            selectedValue={{}}
-            onValueChange={(e) => setForm({ ...form, category: e.title })}
-            values={expenseCategories}
-          />
-        )}
-        {incomeCategoriesVisible && (
-          <CustomDropdown
-            title={"Категория доходов"}
-            selectedValue={{}}
-            onValueChange={(e) => setForm({ ...form, category: e.title })}
-            values={incomeCategories}
-          />
-        )} */}
         <DatePicker
           header={"Начало периода"}
           onDaySelect={(d) =>
@@ -135,7 +96,7 @@ const Reports = () => {
           onValueChange={(e) => setForm({ ...form, currency_id: e.id })}
           values={currencies}
         />
-        
+
         {message && <WrongInputMessage message={message} />}
         <View style={{ marginTop: 25 }}></View>
         <CustomButton
@@ -148,10 +109,10 @@ const Reports = () => {
       </View>
       {reportVisible && (
         <Chart
-          reportVisible = {reportVisible}
-          setReportVisible = {setReportVisible}
-          dataForChart = {data}
-          dataForHeader = {form}
+          reportVisible={reportVisible}
+          setReportVisible={setReportVisible}
+          dataForChart={data}
+          dataForHeader={form}
         />
       )}
     </SafeAreaView>
@@ -159,4 +120,3 @@ const Reports = () => {
 };
 
 export default Reports;
-

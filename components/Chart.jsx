@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Modal, TouchableOpacity, FlatList } from "react-native";
 import React, { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { BarChart, LineChart, PieChart } from "react-native-gifted-charts";
+import { BarChart, PieChart } from "react-native-gifted-charts";
 import ListEmpty from "./ListEmpty";
 
 const Chart = ({

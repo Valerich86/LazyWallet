@@ -5,7 +5,6 @@ import { router } from "expo-router";
 import { getAllBudgets } from "../../database/controllers/budgets.js";
 import ListEmpty from "../../components/ListEmpty.jsx";
 import CustomButton from "../../components/CustomButton.jsx";
-import { Colors } from "../../constants/colors.js";
 
 const Budgets = () => {
   const [data, setData] = useState([]);

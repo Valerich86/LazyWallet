@@ -2,8 +2,7 @@ import { StyleSheet, Text, View, Alert, Image, Button } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useState, useEffect } from "react";
 import { Marquee } from "@animatereactnative/marquee";
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import {saveFile} from '../../services/FileSystem';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 const Profile = () => {
   const [exchangeRate, setExchangeRate] = useState([]);
@@ -53,24 +52,41 @@ const Profile = () => {
   return (
     <SafeAreaView>
       <View style={styles.content}>
-        <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: 20}}>
-          <Text style={{color: 'red'}}>Меню навигации здесь</Text>
-          <View style={{transform: [{rotateZ: '-45deg'}], position: 'absolute', left: '75%', top: -30}}>
-          <FontAwesome name="long-arrow-right" size={50} color="red" />
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            marginTop: 20,
+          }}
+        >
+          <Text style={{ color: "red" }}>Меню навигации здесь</Text>
+          <View
+            style={{
+              transform: [{ rotateZ: "-45deg" }],
+              position: "absolute",
+              left: "75%",
+              top: -30,
+            }}
+          >
+            <FontAwesome name="long-arrow-right" size={50} color="red" />
           </View>
         </View>
-        <View style={{ width: "100%", height: 200, alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-          <Text style={{fontSize: 20, fontStyle: 'italic', color: '#187a5c'}}>Добро пожаловать в</Text>
+        <View
+          style={{
+            width: "100%",
+            height: 200,
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 20,
+          }}
+        >
+          <Text style={{ fontSize: 20, fontStyle: "italic", color: "#187a5c" }}>
+            Добро пожаловать в
+          </Text>
           <Image
             source={require("../../assets/images/logo.png")}
             style={{ height: 100 }}
             resizeMode="contain"
-          />
-        </View>
-        <View>
-          <Button
-            title="Создать файл"
-            onPress={saveFile}
           />
         </View>
         <View>
@@ -108,7 +124,7 @@ const styles = StyleSheet.create({
   content: {
     height: "100%",
     padding: 15,
-    justifyContent: 'space-between'
+    justifyContent: "space-between",
   },
   header: {
     backgroundColor: "yellow",
