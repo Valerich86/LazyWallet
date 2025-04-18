@@ -77,7 +77,9 @@ const Expenses = () => {
   return (
     <SafeAreaView>
       <View style={styles.header}>
-        <Text style={{ fontStyle: "italic" }}>Всего за месяц:</Text>
+        <Text style={{ fontStyle: "italic" }}>
+          Всего за месяц:
+        </Text>
         <View style={{ flexDirection: "row" }}>
           {total.map((item) => (
             <Text
@@ -106,7 +108,9 @@ const Expenses = () => {
                   backgroundColor: "yellow",
                 }}
               >
-                {new Date(item.targetDate).toLocaleString().substring(0, 10)}
+                {new Date(item.targetDate)
+                .toLocaleString()
+                .substring(0, 10)}
               </Text>
               {item.data.map((obj) => (
                 <ListItem item={obj} key={obj.id} />

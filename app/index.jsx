@@ -1,5 +1,4 @@
 import {
-  Text,
   View,
   StyleSheet,
   Animated,
@@ -11,10 +10,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useEffect, useState } from "react";
 import { router } from "expo-router";
 import * as Notifications from "expo-notifications";
-import {checkExistenceDb, createTablesIfNotExists} from "../database/management.js";
+import * as MediaLibrary from 'expo-media-library';
+import {checkExistenceDb} from "../database/management.js";
 import { getAll } from "@/database/controllers/wallets.js";
 import { getAllBudgets } from "@/database/controllers/budgets.js";
-import * as MediaLibrary from 'expo-media-library';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

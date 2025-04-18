@@ -27,9 +27,9 @@ const Budgets = () => {
     const dateEnd = new Date(item.date_end);
     const today = new Date();
     let diffInSecs = dateEnd.getTime() - dateStart.getTime();
-    if (dateStart <= today && today <= dateEnd){
+    if (dateStart <= today && today <= dateEnd) {
       diffInSecs = dateEnd.getTime() - today.getTime();
-    } 
+    }
     let period = Math.round(diffInSecs / (1000 * 3600 * 24)) + 1;
     let oneDayLimit = Math.round((item.sum - item.spent) / period);
 
@@ -45,13 +45,18 @@ const Budgets = () => {
           borderRadius: 5,
         }}
       >
-        <Text style={{ fontSize: 20, fontWeight: '600' }}>{item.title}</Text>
-        {item.date_start !== item.date_end && 
-          <Text style={{ fontSize: 18 }}>{new Date(item.date_start).toLocaleString().substring(0, 10)} - {new Date(item.date_end).toLocaleString().substring(0, 10)}</Text>
-        }
-        {item.date_start === item.date_end && 
-          <Text style={{ fontSize: 18 }}>{new Date(item.date_start).toLocaleString().substring(0, 10)}</Text>
-        }
+        <Text style={{ fontSize: 20, fontWeight: "600" }}>{item.title}</Text>
+        {item.date_start !== item.date_end && (
+          <Text style={{ fontSize: 18 }}>
+            {new Date(item.date_start).toLocaleString().substring(0, 10)} -{" "}
+            {new Date(item.date_end).toLocaleString().substring(0, 10)}
+          </Text>
+        )}
+        {item.date_start === item.date_end && (
+          <Text style={{ fontSize: 18 }}>
+            {new Date(item.date_start).toLocaleString().substring(0, 10)}
+          </Text>
+        )}
         <View
           style={{
             width: "100%",
@@ -74,7 +79,12 @@ const Budgets = () => {
           }}
         >
           <Text style={{ fontStyle: "italic" }}>Потрачено - </Text>
-          <Text style={[{ fontWeight: "500"}, ((item.sum - item.spent) > 0) ? {color: 'green'} : {color: 'red'} ]}>
+          <Text
+            style={[
+              { fontWeight: "500" },
+              item.sum - item.spent > 0 ? { color: "green" } : { color: "red" },
+            ]}
+          >
             {item.spent} {item.sign}
           </Text>
         </View>
@@ -87,7 +97,12 @@ const Budgets = () => {
           }}
         >
           <Text style={{ fontStyle: "italic" }}>Осталось - </Text>
-          <Text style={[{ fontWeight: "500"}, ((item.sum - item.spent) > 0) ? {color: 'green'} : {color: 'red'} ]}>
+          <Text
+            style={[
+              { fontWeight: "500" },
+              item.sum - item.spent > 0 ? { color: "green" } : { color: "red" },
+            ]}
+          >
             {item.sum - item.spent} {item.sign}
           </Text>
         </View>
@@ -100,7 +115,12 @@ const Budgets = () => {
           }}
         >
           <Text style={{ fontStyle: "italic" }}>Лимит на день - </Text>
-          <Text style={[{ fontWeight: "500"}, (oneDayLimit > 0) ? {color: 'green'} : {color: 'red'} ]}>
+          <Text
+            style={[
+              { fontWeight: "500" },
+              oneDayLimit > 0 ? { color: "green" } : { color: "red" },
+            ]}
+          >
             {oneDayLimit} {item.sign}
           </Text>
         </View>

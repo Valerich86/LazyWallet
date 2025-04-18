@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Modal, TouchableOpacity, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Modal,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import React, { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { BarChart, PieChart } from "react-native-gifted-charts";
@@ -79,7 +86,7 @@ const Chart = ({
               )}
               {(dataForHeader.type.value == "expenses_pie" ||
                 dataForHeader.type.value == "incomes_pie") && (
-                <View style={{alignItems: 'center'}}>
+                <View style={{ alignItems: "center" }}>
                   <View style={{ marginBottom: 30, marginTop: 15 }}>
                     <PieChart
                       data={dataForChart}
@@ -91,16 +98,37 @@ const Chart = ({
                       textSize={10}
                     />
                   </View>
-                  <View style={{width: '100%', height: 214, borderRadius: 10, borderWidth: 2, borderColor: 'gray', paddingLeft: 10}}>
+                  <View
+                    style={{
+                      width: "100%",
+                      height: 214,
+                      borderRadius: 10,
+                      borderWidth: 2,
+                      borderColor: "gray",
+                      paddingLeft: 10,
+                    }}
+                  >
                     <FlatList
                       data={dataForChart}
                       keyExtractor={(item) => item.label}
-                      renderItem={({item}) => (
-                        <View style={{flexDirection: 'row', alignItems: 'center'}} key={item.label}>
-                          <View style={{backgroundColor: item.color, borderRadius: 5, width: 35, height: 35, alignItems: 'center', justifyContent: 'center'}}>
-                            <Text style={{color: 'white'}}>{item.text}</Text>
+                      renderItem={({ item }) => (
+                        <View
+                          style={{ flexDirection: "row", alignItems: "center" }}
+                          key={item.label}
+                        >
+                          <View
+                            style={{
+                              backgroundColor: item.color,
+                              borderRadius: 5,
+                              width: 35,
+                              height: 35,
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <Text style={{ color: "white" }}>{item.text}</Text>
                           </View>
-                          <Text style={{marginLeft: 15}}>{item.label}</Text>
+                          <Text style={{ marginLeft: 15 }}>{item.label}</Text>
                         </View>
                       )}
                     />

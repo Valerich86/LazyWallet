@@ -1,6 +1,10 @@
 import * as SQLite from 'expo-sqlite';
 import * as FS from 'expo-file-system';
-import { CurrencyType, IncomeType, ExpenseType } from '../constants/collections';
+import { 
+  CurrencyType, 
+  IncomeType, 
+  ExpenseType 
+} from '../constants/collections';
 
 export const dbName = 'LazyWallet.db';
 
@@ -215,12 +219,9 @@ export async function createExpensesTable () {
 export const checkExistenceDb = async () => {
   const dbDir = FS.documentDirectory + 'SQLite/';
   const dirInfo = await FS.getInfoAsync(dbDir + dbName);
-  
   if (!dirInfo.exists){
-    console.log("База данных добавлена");
     await createTablesIfNotExists(dbName);
   }
-  else console.log ('База данных существует и не пуста');
 }
 
 export async function deleteDb () {
